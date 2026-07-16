@@ -35,7 +35,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: 700, margin: '0 auto', padding: 24 }}>
       <h1>Admin Dashboard</h1>
       <TicketList
         tickets={tickets}

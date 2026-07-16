@@ -27,7 +27,7 @@ export default function EmployeeDashboard() {
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: 700, margin: '0 auto', padding: 24 }}>
       <h1>Employee Dashboard</h1>
       <TicketForm onTicketCreated={handleTicketCreated} />
       <h2>Your requests</h2>
