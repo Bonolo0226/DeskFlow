@@ -1,19 +1,34 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/useAuth';
+import api from '../../services/api';
 
 export default function LoginForm() {
   const [name, setName] = useState('');
   const [role, setRole] = useState('Employee');
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TEMPORARY — Day 4 replaces this with a real API call.
-    // For now, just fake a successful login so we can test routing.
-    login({ name, role, token: 'fake-token-for-now' });
-    navigate(role === 'Employee' ? '/employee' : '/admin');
+    if (!name.trim()) {
+      setError('Enter a name to continue');
+      return;
+    }
+    setError('');
+    setSubmitting(true);
+    try {
+      const { data } = await api.post('/auth/login', { name, role });
+      localStorage.setItem('deskflow_token', data.token);
+      login({ ...data.user, token: data.token });
+      navigate(role === 'Employee' ? '/employee' : '/admin');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Login failed. Try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -25,7 +40,10 @@ export default function LoginForm() {
         <button type="button" onClick={() => setRole('Admin')}>Admin</button>
       </div>
       <p>Selected role: {role}</p>
-      <button type="submit">Continue</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button type="submit" disabled={submitting}>
+        {submitting ? 'Signing in…' : 'Continue'}
+      </button>
     </form>
   );
 }
