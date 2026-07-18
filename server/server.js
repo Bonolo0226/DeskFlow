@@ -8,6 +8,7 @@ const start = async () => {
   await connectDB();
   app.listen(PORT, () => {
     console.log(`DeskFlow API running on http://localhost:${PORT}`);
+    console.log(`Swagger docs at http://localhost:${PORT}/api-docs`);
   });
 };
 
