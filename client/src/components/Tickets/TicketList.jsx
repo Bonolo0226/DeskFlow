@@ -3,21 +3,21 @@ import StatusBadge from './StatusBadge';
 import StatusDropdown from './StatusDropdown';
 
 export default function TicketList({ tickets, loading, error, isAdmin, onStatusChange, updatingId }) {
-  if (loading) return <p>Loading tickets…</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
-  if (!tickets || tickets.length === 0) return <p>No tickets yet.</p>;
+  if (loading) return <p className="list-state">Loading tickets…</p>;
+  if (error) return <p className="list-state list-state--error">{error}</p>;
+  if (!tickets || tickets.length === 0) return <p className="list-state">No tickets yet.</p>;
 
   return (
     <div>
       {tickets.map((t) => (
-        <div key={t._id} style={{ border: '1px solid #ccc', padding: 12, marginBottom: 8 }}>
+        <div key={t._id} className={`ticket-card ticket-card--${t.priority.toLowerCase()}`}>
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <strong>{t.title}</strong>
+            <h3 className="ticket-card__title">{t.title}</h3>
             <PriorityBadge priority={t.priority} />
           </div>
-          <p>{t.description}</p>
-          {isAdmin && <p style={{ fontSize: 12, color: '#666' }}>by {t.createdBy}</p>}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <p className="ticket-card__description">{t.description}</p>
+          {isAdmin && <span className="ticket-card__meta">by {t.createdBy}</span>}
+          <div className="ticket-card__footer">
             <StatusBadge status={t.status} />
             {isAdmin && (
               <StatusDropdown

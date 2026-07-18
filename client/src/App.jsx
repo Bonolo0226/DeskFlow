@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 
+
 export default function App() {
   const { user } = useAuth();
 

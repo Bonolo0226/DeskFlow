@@ -41,27 +41,35 @@ export default function TicketForm({ onTicketCreated }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>New ticket</h2>
+    <form onSubmit={handleSubmit} className="ticket-form">
+      <h2 style={{ margin: 0, fontSize: 15, fontWeight: 600 }}>New ticket</h2>
+
       <div>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-        {errors.title && <p style={{ color: 'red' }}>{errors.title}</p>}
+        <label className="ticket-form__label" htmlFor="title">Title</label>
+        <input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="e.g. VPN won't connect" />
+        {errors.title && <p className="ticket-form__error">{errors.title}</p>}
       </div>
+
       <div>
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
-        {errors.description && <p style={{ color: 'red' }}>{errors.description}</p>}
+        <label className="ticket-form__label" htmlFor="description">Description</label>
+        <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="What's happening?" />
+        {errors.description && <p className="ticket-form__error">{errors.description}</p>}
       </div>
+
       <div>
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
+        <label className="ticket-form__label" htmlFor="priority">Priority</label>
+        <select id="priority" value={priority} onChange={(e) => setPriority(e.target.value)}>
           <option value="">Select priority…</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
           <option value="High">High</option>
         </select>
-        {errors.priority && <p style={{ color: 'red' }}>{errors.priority}</p>}
+        {errors.priority && <p className="ticket-form__error">{errors.priority}</p>}
       </div>
-      {serverError && <p style={{ color: 'red' }}>{serverError}</p>}
-      <button type="submit" disabled={submitting}>
+
+      {serverError && <p className="ticket-form__error">{serverError}</p>}
+
+      <button type="submit" disabled={submitting} className="btn">
         {submitting ? 'Submitting…' : 'Submit ticket'}
       </button>
     </form>
