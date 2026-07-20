@@ -37,7 +37,7 @@ export default function LoginForm() {
           <span className="login-page__brand-mark">DESKFLOW</span>
           <h1 className="login-page__brand-heading">Internal IT service requests, handled properly.</h1>
           <p className="login-page__brand-sub">
-            Submit a ticket, track its status, and get IT admins the context they need — all in one place.
+            Submit a ticket, track its status, and get IT admins the context they need, all in one place.
           </p>
           <div className="login-page__feature-list">
             <div className="login-page__feature"><span className="login-page__feature-dot" /> Role-based access for employees and admins</div>
@@ -51,7 +51,7 @@ export default function LoginForm() {
             <div>
               <span className="login-card__brand">DESKFLOW</span>
               <h1 className="login-card__heading">Sign in</h1>
-              <p className="login-card__subtext">Simulated login — pick a role to test the view.</p>
+              <p className="login-card__subtext">Simulated login: pick a role to test the view.</p>
             </div>
 
             <div className="login-card__field">
